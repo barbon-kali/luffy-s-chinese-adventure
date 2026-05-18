@@ -72,19 +72,20 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "أكاديمية لوفي — تعلم الصينية بأسلوب القراصنة" },
+      { name: "description", content: "منصة تفاعلية لتعليم اللغة الصينية للمبتدئين بأسلوب الأنمي وروح المغامرة. تحديات، نطق، وردود فعل حية." },
+      { property: "og:title", content: "أكاديمية لوفي — تعلم الصينية بأسلوب القراصنة" },
+      { property: "og:description", content: "تعلم الماندرين عبر مغامرة تفاعلية مستوحاة من عالم الأنمي." },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
+      { rel: "stylesheet", href: appCss },
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "" },
       {
         rel: "stylesheet",
-        href: appCss,
+        href: "https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Noto+Sans+SC:wght@500;700;900&family=JetBrains+Mono:wght@500&display=swap",
       },
     ],
   }),
@@ -96,7 +97,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="ar" dir="rtl">
       <head>
         <HeadContent />
       </head>
