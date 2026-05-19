@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
-import { LuffySprite } from "@/components/LuffySprite";
+import { MascotSprite, MASCOT_META, type MascotId } from "@/components/MascotSprite";
 
 export const Route = createFileRoute("/")({
   component: Index,
