@@ -76,7 +76,7 @@ function Nav({ mascot, setMascot }: { mascot: MascotId; setMascot: (m: MascotId)
   );
 }
 
-function Hero() {
+function Hero({ mascot }: { mascot: MascotId }) {
   return (
     <section className="relative py-16 sm:py-20 px-6 max-w-7xl mx-auto flex flex-col md:flex-row-reverse items-center gap-12">
       <div className="absolute inset-0 speed-lines pointer-events-none opacity-50" aria-hidden />
@@ -114,10 +114,10 @@ function Hero() {
         </div>
       </div>
 
-      <div className="flex-1 relative flex items-center justify-center">
+      <div className="flex-1 relative flex items-center justify-center min-h-[420px]">
         <div className="absolute size-72 sm:size-96 bg-luffy-yellow rounded-full -z-10 blur-3xl opacity-40" />
         <div className="relative animate-bounce-slow">
-          <LuffySprite mood="excited" className="w-72 sm:w-96 h-72 sm:h-96 text-luffy-red" />
+          <MascotSprite id={mascot} pose="full" className="w-72 sm:w-[28rem] h-auto drop-shadow-[6px_6px_0px_var(--ink)]" />
         </div>
         {/* sticker badges */}
         <div className="absolute top-4 right-2 bg-luffy-yellow border-4 border-ink px-3 py-1 font-black rotate-12 shadow-impact-sm">
@@ -140,7 +140,7 @@ function Stat({ value, label }: { value: string; label: string }) {
   );
 }
 
-function LessonSection() {
+function LessonSection({ mascot }: { mascot: MascotId }) {
   const [index, setIndex] = useState(0);
   const [selected, setSelected] = useState<string | null>(null);
   const [streak, setStreak] = useState(0);
@@ -264,11 +264,11 @@ function LessonSection() {
               </div>
 
               <div
-                className={`relative z-10 overflow-hidden border-4 border-white bg-parchment ${
+                className={`relative z-10 overflow-hidden border-4 border-white bg-parchment aspect-square ${
                   mood === "shocked" ? "animate-impact-shake" : ""
                 }`}
               >
-                <LuffySprite mood={mood} className="w-full aspect-square text-luffy-red" />
+                <MascotSprite id={mascot} mood={mood} pose="face" className="w-full h-full object-cover" />
               </div>
 
               <div
