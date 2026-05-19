@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
-import { LuffySprite } from "@/components/LuffySprite";
+import { MascotSprite, MASCOT_META, type MascotId } from "@/components/MascotSprite";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -27,20 +27,22 @@ const SHOUTS = {
 };
 
 function Index() {
+  const [mascot, setMascot] = useState<MascotId>("hat");
   return (
     <div className="min-h-screen bg-background font-display text-ink overflow-x-hidden">
-      <Nav />
-      <Hero />
-      <LessonSection />
+      <Nav mascot={mascot} setMascot={setMascot} />
+      <Hero mascot={mascot} />
+      <LessonSection mascot={mascot} />
       <Roadmap />
       <Footer />
     </div>
   );
 }
 
-function Nav() {
+function Nav({ mascot, setMascot }: { mascot: MascotId; setMascot: (m: MascotId) => void }) {
+  const ids: MascotId[] = ["hat", "hoodie", "ribbon"];
   return (
-    <nav className="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b-4 border-ink px-4 sm:px-6 py-3 flex items-center justify-between">
+    <nav className="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b-4 border-ink px-4 sm:px-6 py-3 flex items-center justify-between gap-3">
       <div className="flex items-center gap-4">
         <div className="bg-luffy-red text-white font-black px-3 sm:px-4 py-1 -rotate-2 border-2 border-ink text-lg sm:text-2xl shadow-impact-sm">
           أكاديمية لوفي
@@ -51,12 +53,20 @@ function Nav() {
           <a href="#" className="hover:text-luffy-red transition-colors">المكافآت</a>
         </div>
       </div>
-      <div className="flex items-center gap-3">
-        <div className="text-left">
-          <div className="text-[10px] font-mono leading-none">LEVEL 04</div>
-          <div className="h-2 w-24 sm:w-32 bg-ink/10 mt-1 overflow-hidden border border-ink">
-            <div className="h-full bg-luffy-yellow w-[65%]" />
-          </div>
+      <div className="flex items-center gap-2 sm:gap-3">
+        <div className="hidden sm:flex items-center gap-1 border-2 border-ink p-1 bg-white">
+          {ids.map((id) => (
+            <button
+              key={id}
+              onClick={() => setMascot(id)}
+              aria-label={MASCOT_META[id].name}
+              className={`size-9 overflow-hidden border-2 transition-all ${
+                mascot === id ? "border-luffy-red scale-110" : "border-transparent opacity-60 hover:opacity-100"
+              }`}
+            >
+              <MascotSprite id={id} mood="idle" className="w-full h-full object-cover" />
+            </button>
+          ))}
         </div>
         <div className="size-10 bg-luffy-yellow border-2 border-ink flex items-center justify-center font-black">
           ⚓
@@ -66,7 +76,7 @@ function Nav() {
   );
 }
 
-function Hero() {
+function Hero({ mascot }: { mascot: MascotId }) {
   return (
     <section className="relative py-16 sm:py-20 px-6 max-w-7xl mx-auto flex flex-col md:flex-row-reverse items-center gap-12">
       <div className="absolute inset-0 speed-lines pointer-events-none opacity-50" aria-hidden />
@@ -104,10 +114,10 @@ function Hero() {
         </div>
       </div>
 
-      <div className="flex-1 relative flex items-center justify-center">
+      <div className="flex-1 relative flex items-center justify-center min-h-[420px]">
         <div className="absolute size-72 sm:size-96 bg-luffy-yellow rounded-full -z-10 blur-3xl opacity-40" />
         <div className="relative animate-bounce-slow">
-          <LuffySprite mood="excited" className="w-72 sm:w-96 h-72 sm:h-96 text-luffy-red" />
+          <MascotSprite id={mascot} pose="full" className="w-72 sm:w-[28rem] h-auto drop-shadow-[6px_6px_0px_var(--ink)]" />
         </div>
         {/* sticker badges */}
         <div className="absolute top-4 right-2 bg-luffy-yellow border-4 border-ink px-3 py-1 font-black rotate-12 shadow-impact-sm">
@@ -130,7 +140,7 @@ function Stat({ value, label }: { value: string; label: string }) {
   );
 }
 
-function LessonSection() {
+function LessonSection({ mascot }: { mascot: MascotId }) {
   const [index, setIndex] = useState(0);
   const [selected, setSelected] = useState<string | null>(null);
   const [streak, setStreak] = useState(0);
@@ -254,11 +264,11 @@ function LessonSection() {
               </div>
 
               <div
-                className={`relative z-10 overflow-hidden border-4 border-white bg-parchment ${
+                className={`relative z-10 overflow-hidden border-4 border-white bg-parchment aspect-square ${
                   mood === "shocked" ? "animate-impact-shake" : ""
                 }`}
               >
-                <LuffySprite mood={mood} className="w-full aspect-square text-luffy-red" />
+                <MascotSprite id={mascot} mood={mood} pose="face" className="w-full h-full object-cover" />
               </div>
 
               <div
