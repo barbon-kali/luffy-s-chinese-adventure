@@ -27,20 +27,22 @@ const SHOUTS = {
 };
 
 function Index() {
+  const [mascot, setMascot] = useState<MascotId>("hat");
   return (
     <div className="min-h-screen bg-background font-display text-ink overflow-x-hidden">
-      <Nav />
-      <Hero />
-      <LessonSection />
+      <Nav mascot={mascot} setMascot={setMascot} />
+      <Hero mascot={mascot} />
+      <LessonSection mascot={mascot} />
       <Roadmap />
       <Footer />
     </div>
   );
 }
 
-function Nav() {
+function Nav({ mascot, setMascot }: { mascot: MascotId; setMascot: (m: MascotId) => void }) {
+  const ids: MascotId[] = ["hat", "hoodie", "ribbon"];
   return (
-    <nav className="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b-4 border-ink px-4 sm:px-6 py-3 flex items-center justify-between">
+    <nav className="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b-4 border-ink px-4 sm:px-6 py-3 flex items-center justify-between gap-3">
       <div className="flex items-center gap-4">
         <div className="bg-luffy-red text-white font-black px-3 sm:px-4 py-1 -rotate-2 border-2 border-ink text-lg sm:text-2xl shadow-impact-sm">
           أكاديمية لوفي
@@ -51,12 +53,20 @@ function Nav() {
           <a href="#" className="hover:text-luffy-red transition-colors">المكافآت</a>
         </div>
       </div>
-      <div className="flex items-center gap-3">
-        <div className="text-left">
-          <div className="text-[10px] font-mono leading-none">LEVEL 04</div>
-          <div className="h-2 w-24 sm:w-32 bg-ink/10 mt-1 overflow-hidden border border-ink">
-            <div className="h-full bg-luffy-yellow w-[65%]" />
-          </div>
+      <div className="flex items-center gap-2 sm:gap-3">
+        <div className="hidden sm:flex items-center gap-1 border-2 border-ink p-1 bg-white">
+          {ids.map((id) => (
+            <button
+              key={id}
+              onClick={() => setMascot(id)}
+              aria-label={MASCOT_META[id].name}
+              className={`size-9 overflow-hidden border-2 transition-all ${
+                mascot === id ? "border-luffy-red scale-110" : "border-transparent opacity-60 hover:opacity-100"
+              }`}
+            >
+              <MascotSprite id={id} mood="idle" className="w-full h-full object-cover" />
+            </button>
+          ))}
         </div>
         <div className="size-10 bg-luffy-yellow border-2 border-ink flex items-center justify-center font-black">
           ⚓
