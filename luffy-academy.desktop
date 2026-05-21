@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=أكاديمية لوفي
+Name[en]=Luffy Academy
+Comment=تعلم الصينية بأسلوب القراصنة
+Exec=bash -c "cd $(dirname %k) && ./run-linux.sh"
+Icon=applications-education
+Terminal=true
+Type=Application
+Categories=Education;Languages;
