@@ -203,6 +203,7 @@ function Hero({
           <Stat value={String(learned)} label="كلمة محفوظة" />
           <Stat value={String(best)} label="أفضل سلسلة" />
         </div>
+        <div className="mt-6 text-xs font-mono text-ink/50">By Boukaache younes</div>
       </div>
 
       <div className="flex-1 relative flex items-center justify-center min-h-[420px]">
@@ -521,6 +522,9 @@ function Footer() {
       </div>
       <div className="text-center mt-10 text-xs font-mono opacity-70 relative">
         © 2025 LUFFY ACADEMY — THE SHONEN WAY TO FLUENCY
+      </div>
+      <div className="text-center mt-2 text-[10px] font-mono opacity-50 relative">
+        By Boukaache younes
       </div>
     </footer>
   );
