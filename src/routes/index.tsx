@@ -523,6 +523,9 @@ function Footer() {
       <div className="text-center mt-10 text-xs font-mono opacity-70 relative">
         © 2025 LUFFY ACADEMY — THE SHONEN WAY TO FLUENCY
       </div>
+      <div className="text-center mt-2 text-[10px] font-mono opacity-50 relative">
+        By Boukaache younes
+      </div>
     </footer>
   );
 }
