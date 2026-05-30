@@ -203,6 +203,7 @@ function Hero({
           <Stat value={String(learned)} label="كلمة محفوظة" />
           <Stat value={String(best)} label="أفضل سلسلة" />
         </div>
+        <div className="mt-6 text-xs font-mono text-ink/50">By Boukaache younes</div>
       </div>
 
       <div className="flex-1 relative flex items-center justify-center min-h-[420px]">
